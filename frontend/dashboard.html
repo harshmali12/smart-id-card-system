@@ -1,0 +1,82 @@
+<!-- Updated dashboard.html for MySQL Integration -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Smart ID System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        
+        <h1>Smart ID System Dashboard</h1>
+        <button onclick="logout()">Logout</button>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="students.html">Manage Students</a></li>
+            <li><a href="attendance.html">View Attendance</a></li>
+            
+        </ul>
+    </nav>
+   
+
+    <script>
+        // ✅ Logout Function
+        function logout() {
+            localStorage.removeItem("adminToken");
+            window.location.href = "index.html";
+        }
+
+        // ✅ Fetch and Display Student List
+        async function loadStudents() {
+            let studentsTableBody = document.getElementById("students-table-body");
+
+            if (!studentsTableBody) {
+                console.error("❌ Error: Student table not found in DOM.");
+                return;
+            }
+
+            try {
+                const response = await fetch("http://localhost:5002/api/students");
+
+                if (!response.ok) {
+                    console.error("❌ Server Error:", response.status);
+                    return;
+                }
+
+                const students = await response.json();
+                studentsTableBody.innerHTML = ""; // Clear previous entries
+
+                if (students.length === 0) {
+                    studentsTableBody.innerHTML = `<tr><td colspan="5">No students found.</td></tr>`;
+                    return;
+                }
+
+                students.forEach((student) => {
+                    let row = `<tr>
+                        <td>${student.id}</td>
+                        <td>${student.name}</td>
+                        <td>${student.rfidUID}</td>
+                        <td>${student.fingerprintID}</td>
+                        <td>
+                            <button onclick="deleteStudent(${student.id})">Delete</button>
+                        </td>
+                    </tr>`;
+                    studentsTableBody.innerHTML += row;
+                });
+
+            } catch (error) {
+                console.error("❌ Error loading students:", error);
+            }
+        }
+
+        // ✅ Run this function when the page loads
+        document.addEventListener("DOMContentLoaded", function () {
+            loadStudents();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!-- Updated attendance.html for MySQL Integration -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance - Smart ID System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Attendance Records</h1>
+        <a href="dashboard.html">Back to Dashboard</a>
+    </header>
+    <table id="attendance-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>User ID</th>
+                <th>RFID UID</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody id="attendance-table-body">
+            <!-- Attendance records will be added here dynamically -->
+        </tbody>
+    </table>    
+    <script src="script.js"></script>
+</body>
+</html>

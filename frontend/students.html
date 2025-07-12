@@ -1,0 +1,40 @@
+<!-- Updated students.html for MySQL Integration -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Students - Smart ID System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Manage Students</h1>
+        <a href="dashboard.html">Back to Dashboard</a>
+    </header>
+    <section>
+        <h2>Add Student</h2>
+        <input type="text" id="student-name" placeholder="Student Name">
+        <input type="text" id="rfid-id" placeholder="RFID UID">
+        <input type="text" id="fingerprint-id" placeholder="Fingerprint ID">
+        <button onclick="addStudent()">Add Student</button>
+        <p id="form-message"></p>
+    </section>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>RFID UID</th>
+                <th>Fingerprint ID</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="students-table-body">
+            <!-- Students data will be added dynamically -->
+        </tbody>
+    </table>
+    
+    <script src="script.js"></script>
+</body>
+</html>
